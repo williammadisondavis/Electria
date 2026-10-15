@@ -1,0 +1,85 @@
+{
+  "users": [
+    {
+      "user_id": "7c055c89-73f5-49a0-9632-dab3bf6ec377",
+      "full_name": "Maya Bennett",
+      "created_at": "2026-09-01T14:00:00+00:00",
+      "account_status": "active"
+    },
+    {
+      "user_id": "b240d03d-cbc8-4e32-99d6-7fa175a073fb",
+      "full_name": "Ethan Rivera",
+      "created_at": "2026-09-02T16:30:00+00:00",
+      "account_status": "active"
+    }
+  ],
+  "vehicle_types": [
+    {
+      "type_id": "97ffdbc8-61ed-4092-a269-b8e2bb35c958",
+      "type_name": "e-bike",
+      "description": "Electric bicycle with pedal assistance."
+    },
+    {
+      "type_id": "3aa49a68-d403-4316-927e-55bfccc95cc8",
+      "type_name": "e-scooter",
+      "description": "Standing electric scooter for short urban trips."
+    },
+    {
+      "type_id": "56a47dbf-92ec-452b-b1ac-ba8ca7b8e9e0",
+      "type_name": "e-skateboard",
+      "description": "Electric skateboard operated with a handheld remote."
+    }
+  ],
+  "vehicles": [
+    {
+      "vehicle_id": "8b6a0ac9-1463-4daa-bb8b-0752affdd867",
+      "owner_id": "7c055c89-73f5-49a0-9632-dab3bf6ec377",
+      "type_id": "97ffdbc8-61ed-4092-a269-b8e2bb35c958",
+      "brand": "Aventon",
+      "model": "Pace 500.3",
+      "model_year": 2024,
+      "description": "Step-through commuter e-bike with pedal assist, lights, and a rear rack.",
+      "condition_status": "excellent"
+    },
+    {
+      "vehicle_id": "965e00a5-a585-4c28-a296-b3e1e1a87779",
+      "owner_id": "b240d03d-cbc8-4e32-99d6-7fa175a073fb",
+      "type_id": "97ffdbc8-61ed-4092-a269-b8e2bb35c958",
+      "brand": "Rad Power Bikes",
+      "model": "RadCity 5 Plus",
+      "model_year": 2023,
+      "description": "Upright commuter e-bike with fenders and a rear cargo rack.",
+      "condition_status": "good"
+    },
+    {
+      "vehicle_id": "96a504de-f5d7-48b6-a918-de0c699d1bfc",
+      "owner_id": "7c055c89-73f5-49a0-9632-dab3bf6ec377",
+      "type_id": "3aa49a68-d403-4316-927e-55bfccc95cc8",
+      "brand": "Segway",
+      "model": "Ninebot MAX G2",
+      "model_year": 2024,
+      "description": "Folding electric scooter with suspension and integrated lights.",
+      "condition_status": "excellent"
+    },
+    {
+      "vehicle_id": "9e9c6ef8-0e58-4da0-80fa-af1ce3d1bb80",
+      "owner_id": "b240d03d-cbc8-4e32-99d6-7fa175a073fb",
+      "type_id": "3aa49a68-d403-4316-927e-55bfccc95cc8",
+      "brand": "NIU",
+      "model": "KQi3 Pro",
+      "model_year": 2023,
+      "description": "Electric scooter with a wide deck and visible cosmetic scratches.",
+      "condition_status": "fair"
+    },
+    {
+      "vehicle_id": "18649641-188b-48a6-86d3-8fbc1eff13ad",
+      "owner_id": "b240d03d-cbc8-4e32-99d6-7fa175a073fb",
+      "type_id": "56a47dbf-92ec-452b-b1ac-ba8ca7b8e9e0",
+      "brand": "Meepo",
+      "model": "V5",
+      "model_year": 2024,
+      "description": "Electric longboard with a wireless remote and light deck wear.",
+      "condition_status": "good"
+    }
+  ]
+}
