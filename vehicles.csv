@@ -1,0 +1,6 @@
+vehicle_id,owner_id,type_id,brand,model,model_year,description,condition_status
+8b6a0ac9-1463-4daa-bb8b-0752affdd867,7c055c89-73f5-49a0-9632-dab3bf6ec377,97ffdbc8-61ed-4092-a269-b8e2bb35c958,Aventon,Pace 500.3,2024,"Step-through commuter e-bike with pedal assist, lights, and a rear rack.",excellent
+965e00a5-a585-4c28-a296-b3e1e1a87779,b240d03d-cbc8-4e32-99d6-7fa175a073fb,97ffdbc8-61ed-4092-a269-b8e2bb35c958,Rad Power Bikes,RadCity 5 Plus,2023,Upright commuter e-bike with fenders and a rear cargo rack.,good
+96a504de-f5d7-48b6-a918-de0c699d1bfc,7c055c89-73f5-49a0-9632-dab3bf6ec377,3aa49a68-d403-4316-927e-55bfccc95cc8,Segway,Ninebot MAX G2,2024,Folding electric scooter with suspension and integrated lights.,excellent
+9e9c6ef8-0e58-4da0-80fa-af1ce3d1bb80,b240d03d-cbc8-4e32-99d6-7fa175a073fb,3aa49a68-d403-4316-927e-55bfccc95cc8,NIU,KQi3 Pro,2023,Electric scooter with a wide deck and visible cosmetic scratches.,fair
+18649641-188b-48a6-86d3-8fbc1eff13ad,b240d03d-cbc8-4e32-99d6-7fa175a073fb,56a47dbf-92ec-452b-b1ac-ba8ca7b8e9e0,Meepo,V5,2024,Electric longboard with a wireless remote and light deck wear.,good

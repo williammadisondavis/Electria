@@ -1,0 +1,3 @@
+user_id,full_name,email,password_hash,phone,created_at,account_status
+7c055c89-73f5-49a0-9632-dab3bf6ec377,Maya Bennett,maya.bennett@example.com,pbkdf2_sha256$600000$dxk5WfN1qxx2ekflfH3oPg==$UDDfSPi0Orp99qS2eFC72rZ6AZ3ue2cxk3QKLt+T3pk=,+1-202-555-0142,2026-09-01T14:00:00+00:00,active
+b240d03d-cbc8-4e32-99d6-7fa175a073fb,Ethan Rivera,ethan.rivera@example.com,pbkdf2_sha256$600000$JhPxwG0PyJhvDE4QDN2HHQ==$c35BR096+UsIEr/zGy6vobjidMpXtYrAdBkRWWaX0c4=,+1-202-555-0176,2026-09-02T16:30:00+00:00,active
