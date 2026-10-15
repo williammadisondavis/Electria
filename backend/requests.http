@@ -1,0 +1,17 @@
+# Optional: use the VS Code REST Client extension, or open these in a browser.
+GET http://127.0.0.1:4000/health
+
+### Check the database separately
+GET http://127.0.0.1:4000/api/db-health
+
+### Users (no credentials or contact details)
+GET http://127.0.0.1:4000/api/users
+
+### Categories
+GET http://127.0.0.1:4000/api/vehicle-types
+
+### All vehicles, with owner and category
+GET http://127.0.0.1:4000/api/vehicles
+
+### E-bikes from the current sample dataset
+GET http://127.0.0.1:4000/api/vehicles?type_id=97ffdbc8-61ed-4092-a269-b8e2bb35c958

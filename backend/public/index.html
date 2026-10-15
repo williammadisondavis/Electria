@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electria backend test</title>
+<style>
+  body { max-width: 960px; margin: 32px auto; padding: 0 20px; font: 16px Arial, sans-serif; line-height: 1.5; }
+  button { padding: 10px 14px; margin: 4px; cursor: pointer; }
+  pre { background: #f3f3f3; padding: 18px; overflow: auto; max-height: 65vh; border: 1px solid #ccc; }
+</style>
+<h1>Electria backend test</h1>
+<p>Use these buttons to test the API. Each response identifies whether its data comes from demo records or Supabase.</p>
+<p id="mode">Checking server...</p>
+<div>
+  <button data-path="/health">Server health</button>
+  <button data-path="/api/db-health">Database connection</button>
+  <button data-path="/api/users">Users</button>
+  <button data-path="/api/vehicle-types">Vehicle types</button>
+  <button data-path="/api/vehicles">Vehicles</button>
+</div>
+<p id="request">Choose an endpoint above.</p>
+<pre id="result">Results appear here.</pre>
+<script>
+  async function run(path) {
+    document.querySelector('#request').textContent = 'GET ' + path;
+    document.querySelector('#result').textContent = 'Loading...';
+    try {
+      const response = await fetch(path);
+      const data = await response.json();
+      document.querySelector('#request').textContent = 'GET ' + path + ' - HTTP ' + response.status;
+      document.querySelector('#result').textContent = JSON.stringify(data, null, 2);
+    } catch {
+      document.querySelector('#result').textContent = 'Could not reach the backend. Check that npm start is running.';
+    }
+  }
+  for (const button of document.querySelectorAll('button[data-path]')) {
+    button.addEventListener('click', () => run(button.dataset.path));
+  }
+  fetch('/health').then((response) => response.json()).then((data) => {
+    document.querySelector('#mode').textContent = 'Data source: ' + data.data_source + '. This is a local development API.';
+  }).catch(() => { document.querySelector('#mode').textContent = 'Server unavailable.'; });
+</script>
+</html>
