@@ -34,7 +34,7 @@ ORDER BY
     v.brand,
     v.model;
 
--- Query 3: Filter vehicles by category.
+-- Query 3: Filter vehicles by category
 -- Change 'e-bike' to 'e-scooter' or 'e-skateboard' to view another category.
 SELECT
     v.vehicle_id,
