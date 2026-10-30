@@ -7,6 +7,8 @@
 - [ ] `npm run lint`
 - [ ] `npm run typecheck`
 - [ ] `npm test`
+- [ ] `npm run db:validate`
+- [ ] `npm run db:migrate`
 - [ ] `npm run build`
 - [ ] Manual acceptance scenarios completed
 
