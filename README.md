@@ -8,10 +8,11 @@ Next.js App Router and TypeScript application foundation for Electria.
 2. Clone the repository and enter its root directory.
 3. Install dependencies with `npm ci`.
 4. Copy `.env.example` to `.env` if you need local integrations.
-5. Fill in the applicable local database, auth, and Stripe values; the scaffold
-   runs without them.
-6. Start the development server with `npm run dev`.
-7. Open [http://localhost:3000](http://localhost:3000).
+5. To work with the database, set `DATABASE_URL` and `DIRECT_URL` to your
+   PostgreSQL connection strings.
+6. Create/update the database from committed migrations with `npm run db:migrate`.
+7. Start the development server with `npm run dev`.
+8. Open [http://localhost:3000](http://localhost:3000).
 
 ## Repository structure
 
@@ -38,6 +39,14 @@ documents and [docs/decisions.md](./docs/decisions.md) for recorded decisions.
 | `npm test`             | Run API contract tests.                                                   |
 | `npm run format`       | Format application, test, and scaffold documentation files with Prettier. |
 | `npm run format:check` | Verify formatting.                                                        |
+| `npm run db:validate`  | Validate the Prisma schema.                                               |
+| `npm run db:generate`  | Generate the Prisma Client.                                               |
+| `npm run db:migrate`   | Apply/create migrations in development.                                   |
+| `npm run db:deploy`    | Apply committed migrations in deployment environments.                    |
+| `npm run db:status`    | Check migration status.                                                   |
+
+Database schema decisions and existing-database migration instructions are in
+[docs/schema-changes.md](./docs/schema-changes.md).
 
 ## Branching and pull requests
 

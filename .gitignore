@@ -5,6 +5,7 @@ out/
 build/
 coverage/
 *.tsbuildinfo
+prisma/generated/
 
 # Local environment files (keep the checked-in template)
 .env*

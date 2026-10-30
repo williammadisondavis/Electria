@@ -1,0 +1,206 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  rider
+  renter
+  both
+  admin
+
+  @@map("user_role")
+}
+
+enum BookingStatus {
+  requested
+  confirmed
+  completed
+  cancelled
+
+  @@map("booking_status")
+}
+
+enum ListingStatus {
+  active
+  paused
+
+  @@map("listing_status")
+}
+
+model User {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @map("user_id") @db.Uuid
+  fullName      String    @map("full_name") @db.VarChar(100)
+  email         String    @unique(map: "users_email_unique") @db.VarChar(254)
+  passwordHash  String    @map("password_hash") @db.VarChar(255)
+  phone         String?   @db.VarChar(30)
+  homeCity      String?   @map("home_city") @db.VarChar(80)
+  dateOfBirth   DateTime? @map("date_of_birth") @db.Date
+  role          UserRole  @default(both)
+  idVerified    Boolean   @default(false) @map("id_verified")
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  accountStatus String    @default("active") @map("account_status") @db.VarChar(20)
+
+  vehicles        Vehicle[]
+  riderBookings   Booking[] @relation("BookingRider")
+  messages        Message[]
+  reviewsGiven    Review[]  @relation("ReviewReviewer")
+  reviewsReceived Review[]  @relation("ReviewReviewee")
+
+  @@map("users")
+}
+
+model VehicleType {
+  id          String  @id @default(dbgenerated("gen_random_uuid()")) @map("type_id") @db.Uuid
+  name        String  @unique(map: "vehicle_types_type_name_unique") @map("type_name") @db.VarChar(40)
+  description String? @db.Text
+
+  vehicles Vehicle[]
+
+  @@map("vehicle_types")
+}
+
+model Vehicle {
+  id              String  @id @default(dbgenerated("gen_random_uuid()")) @map("vehicle_id") @db.Uuid
+  ownerId         String  @map("owner_id") @db.Uuid
+  categoryId      String  @map("type_id") @db.Uuid
+  brand           String  @db.VarChar(100)
+  model           String  @db.VarChar(80)
+  modelYear       Int?    @map("model_year") @db.SmallInt
+  description     String? @db.Text
+  allowedUse      String  @default("both") @map("allowed_use") @db.VarChar(20)
+  conditionStatus String  @map("condition_status") @db.VarChar(20)
+
+  owner    User        @relation(fields: [ownerId], references: [id], onDelete: Restrict, map: "vehicles_owner_fk")
+  category VehicleType @relation(fields: [categoryId], references: [id], onDelete: Restrict, map: "vehicles_type_fk")
+  listing  Listing?
+
+  @@index([ownerId], map: "vehicles_owner_id_idx")
+  @@index([categoryId], map: "vehicles_type_id_idx")
+  @@map("vehicles")
+}
+
+model Listing {
+  id            String        @id @default(dbgenerated("gen_random_uuid()")) @map("listing_id") @db.Uuid
+  vehicleId     String        @unique(map: "listings_vehicle_id_key") @map("vehicle_id") @db.Uuid
+  title         String        @db.VarChar(120)
+  dailyRate     Decimal       @map("daily_rate") @db.Decimal(10, 2)
+  currency      String        @db.Char(3)
+  pickupCity    String        @map("pickup_city") @db.VarChar(80)
+  pickupAddress String        @map("pickup_address") @db.VarChar(255)
+  pickupArea    String?       @map("pickup_area") @db.VarChar(120)
+  pickupLat     Decimal?      @map("pickup_lat") @db.Decimal(9, 6)
+  pickupLng     Decimal?      @map("pickup_lng") @db.Decimal(9, 6)
+  listingStatus ListingStatus @default(paused) @map("listing_status")
+  createdAt     DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  vehicle            Vehicle             @relation(fields: [vehicleId], references: [id], onDelete: Restrict, map: "listings_vehicle_fk")
+  photos             ListingPhoto[]
+  availabilityBlocks AvailabilityBlock[]
+  bookings           Booking[]
+
+  @@index([listingStatus, pickupCity], map: "listings_listing_status_pickup_city_idx")
+  @@map("listings")
+}
+
+model ListingPhoto {
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @map("photo_id") @db.Uuid
+  listingId String  @map("listing_id") @db.Uuid
+  photoUrl  String  @map("photo_url") @db.VarChar(500)
+  sortOrder Int     @default(0) @map("sort_order") @db.SmallInt
+  isCover   Boolean @default(false) @map("is_cover")
+
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade, map: "listing_photos_listing_fk")
+
+  @@index([listingId], map: "listing_photos_listing_id_idx")
+  @@map("listing_photos")
+}
+
+model AvailabilityBlock {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @map("block_id") @db.Uuid
+  listingId String   @map("listing_id") @db.Uuid
+  startAt   DateTime @map("start_at") @db.Timestamptz(6)
+  endAt     DateTime @map("end_at") @db.Timestamptz(6)
+  reason    String?  @db.VarChar(120)
+
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade, map: "availability_blocks_listing_fk")
+
+  @@index([listingId, startAt, endAt], map: "availability_blocks_listing_start_end_idx")
+  @@map("availability_blocks")
+}
+
+model Booking {
+  id                 String        @id @default(dbgenerated("gen_random_uuid()")) @map("booking_id") @db.Uuid
+  listingId          String        @map("listing_id") @db.Uuid
+  riderId            String        @map("rider_id") @db.Uuid
+  startAt            DateTime      @map("start_at") @db.Timestamptz(6)
+  endAt              DateTime      @map("end_at") @db.Timestamptz(6)
+  status             BookingStatus @default(requested)
+  approvedAt         DateTime?     @map("approved_at") @db.Timestamptz(6)
+  dailyRateAtBooking Decimal       @map("daily_rate_at_booking") @db.Decimal(10, 2)
+  serviceFee         Decimal       @map("service_fee") @db.Decimal(10, 2)
+  totalAmount        Decimal       @map("total_amount") @db.Decimal(10, 2)
+  currency           String        @db.Char(3)
+  createdAt          DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  listing  Listing   @relation(fields: [listingId], references: [id], onDelete: Restrict, map: "bookings_listing_fk")
+  rider    User      @relation("BookingRider", fields: [riderId], references: [id], onDelete: Restrict, map: "bookings_rider_fk")
+  payments Payment[]
+  messages Message[]
+  reviews  Review[]
+
+  @@index([listingId, startAt, endAt], map: "bookings_listing_start_end_idx")
+  @@index([riderId], map: "bookings_rider_id_idx")
+  @@map("bookings")
+}
+
+model Payment {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @map("payment_id") @db.Uuid
+  bookingId       String    @map("booking_id") @db.Uuid
+  stripePaymentId String    @unique(map: "payments_stripe_payment_id_key") @map("stripe_payment_id") @db.VarChar(120)
+  amount          Decimal   @db.Decimal(10, 2)
+  currency        String    @db.Char(3)
+  status          String    @db.VarChar(20)
+  paidAt          DateTime? @map("paid_at") @db.Timestamptz(6)
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Restrict, map: "payments_booking_fk")
+
+  @@index([bookingId], map: "payments_booking_id_idx")
+  @@map("payments")
+}
+
+model Message {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @map("message_id") @db.Uuid
+  bookingId String   @map("booking_id") @db.Uuid
+  senderId  String   @map("sender_id") @db.Uuid
+  body      String   @db.Text
+  sentAt    DateTime @default(now()) @map("sent_at") @db.Timestamptz(6)
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade, map: "messages_booking_fk")
+  sender  User    @relation(fields: [senderId], references: [id], onDelete: Restrict, map: "messages_sender_fk")
+
+  @@index([bookingId, sentAt], map: "messages_booking_sent_at_idx")
+  @@index([senderId], map: "messages_sender_id_idx")
+  @@map("messages")
+}
+
+model Review {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @map("review_id") @db.Uuid
+  bookingId  String   @map("booking_id") @db.Uuid
+  reviewerId String   @map("reviewer_id") @db.Uuid
+  revieweeId String   @map("reviewee_id") @db.Uuid
+  rating     Int      @db.SmallInt
+  comment    String?  @db.Text
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  booking  Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade, map: "reviews_booking_fk")
+  reviewer User    @relation("ReviewReviewer", fields: [reviewerId], references: [id], onDelete: Restrict, map: "reviews_reviewer_fk")
+  reviewee User    @relation("ReviewReviewee", fields: [revieweeId], references: [id], onDelete: Restrict, map: "reviews_reviewee_fk")
+
+  @@unique([bookingId, reviewerId], map: "reviews_booking_id_reviewer_id_key")
+  @@index([revieweeId], map: "reviews_reviewee_id_idx")
+  @@map("reviews")
+}

@@ -1,3 +1,6 @@
+-- SUPERSEDED by prisma/migrations. Retained as the legacy-schema baseline for
+-- databases created before Prisma migrations were introduced.
+-- Do not apply this file directly to a new database; use Prisma migrations.
 -- Electria table definitions: Users, Vehicle Types, and Vehicles
 -- PostgreSQL (Supabase). Column names match users.csv, vehicle_types.csv, and vehicles.csv.
 
