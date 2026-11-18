@@ -1,0 +1,44 @@
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.95fr);
+  gap: 1.15rem;
+  align-items: start;
+}
+.rows {
+  display: grid;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  border-top: 1px solid var(--line);
+  padding: 0.82rem 0;
+}
+.row:last-child {
+  padding-bottom: 0;
+}
+.small {
+  font-size: 0.86rem;
+  margin-top: 0.2rem;
+}
+.actions,
+.formActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.actions :global(.button),
+.row > button {
+  min-height: 2.2rem;
+  padding: 0.39rem 0.63rem;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 860px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}
