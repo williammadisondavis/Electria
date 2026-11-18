@@ -1,0 +1,159 @@
+.page {
+  padding-top: clamp(1.4rem, 3vw, 2.3rem);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  min-height: 22rem;
+  background: var(--ink);
+  overflow: hidden;
+  border-radius: 1rem;
+  color: var(--surface);
+}
+
+.intro {
+  display: grid;
+  gap: 1rem;
+  align-content: center;
+  justify-items: start;
+  padding: clamp(1.7rem, 5.1vw, 4.1rem);
+}
+
+.intro h1 {
+  font-size: clamp(3rem, 7vw, 6.15rem);
+}
+.intro :global(.eyebrow) {
+  color: var(--accent);
+}
+.intro > p:not(:first-child) {
+  color: #d6e4d9;
+  font-size: clamp(1rem, 1.8vw, 1.16rem);
+}
+.intro a {
+  margin-top: 0.35rem;
+}
+
+.heroImage {
+  min-height: 100%;
+  position: relative;
+  background: radial-gradient(ellipse at 60% 38%, #eef5d9, #c7d6aa);
+}
+
+.heroImage img {
+  object-fit: contain;
+  padding: clamp(1rem, 2.6vw, 2.4rem);
+  mix-blend-mode: multiply;
+}
+
+.listings {
+  margin-top: clamp(2.4rem, 5vw, 3.9rem);
+  scroll-margin-top: 1.2rem;
+}
+.sectionTitle,
+.resultBar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.clear {
+  background: transparent;
+  color: var(--ink);
+  font-weight: 620;
+  font-size: 0.87rem;
+  border: 0;
+  padding: 0.55rem 0;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.filters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+.resultBar {
+  margin-block: 1.1rem 0.85rem;
+  font-size: 0.87rem;
+}
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+}
+.sort select {
+  width: auto;
+  min-height: 2.3rem;
+  padding-block: 0.36rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.05rem;
+}
+.card {
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-decoration: none;
+}
+.card:hover {
+  border-color: #879b88;
+  box-shadow: 0 5px 18px #142d1e14;
+}
+.cardImage {
+  position: relative;
+  aspect-ratio: 1.63;
+  background: var(--tint);
+}
+.cardImage img {
+  object-fit: cover;
+}
+.cardImage[data-category="E-scooter"] img {
+  object-position: 50% 67%;
+}
+.cardBody {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.95rem;
+}
+.cardTitle {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 0.8rem;
+  flex-wrap: wrap;
+}
+.cardTitle > span,
+.location {
+  white-space: nowrap;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 680px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .heroImage {
+    min-height: 12rem;
+  }
+  .filters {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+}
+@media (max-width: 550px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
