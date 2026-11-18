@@ -1,0 +1,68 @@
+.grid {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(19rem, 1fr);
+  gap: clamp(1rem, 3vw, 2.2rem);
+  align-items: start;
+}
+.details {
+  display: grid;
+  gap: 1.6rem;
+}
+.details h1 {
+  font-size: clamp(2.3rem, 4.4vw, 3.6rem);
+}
+.image {
+  position: relative;
+  aspect-ratio: 1.68;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--tint);
+}
+.image img {
+  object-fit: cover;
+}
+.image[data-category="E-scooter"] img {
+  object-position: 50% 66%;
+}
+.price strong {
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+.booking {
+  gap: 1.15rem;
+}
+.cost,
+.facts {
+  margin: 0;
+}
+.cost > div,
+.facts > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.72rem 0;
+  border-top: 1px solid var(--line);
+}
+.cost dt,
+.facts dt {
+  color: var(--muted);
+}
+.cost dd,
+.facts dd {
+  margin: 0;
+  text-align: right;
+}
+.cost > div:last-child {
+  font-weight: 740;
+}
+.cost > div:last-child dt {
+  color: var(--ink);
+}
+
+@media (max-width: 800px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
