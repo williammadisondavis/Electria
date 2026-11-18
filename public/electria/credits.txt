@@ -1,0 +1,16 @@
+Electria demo media
+
+hero.webp: "Electric Bicycle" by Mikefairbanks. Resized and converted to WebP.
+https://commons.wikimedia.org/wiki/File:Electric_Bicycle.jpg
+https://creativecommons.org/licenses/by-sa/3.0/
+
+bike.webp: "BESV PSA1 electric bicycle" by Syced (CC0 1.0).
+https://commons.wikimedia.org/wiki/File:BESV_PSA1_electric_bicycle.jpg
+
+scooter.webp: "Trottinette électrique Xiaomi Mijia M365" by Axel.206 (CC0 1.0).
+https://commons.wikimedia.org/wiki/File:Trottinette_%C3%A9lectrique_Xiaomi_Mijia_M365.jpg
+
+board.webp: "Electric Skateboard Elektro Skateboard" (CC0 1.0).
+https://commons.wikimedia.org/wiki/File:Electric_Skateboard_Elektro_Skateboard.jpg
+
+Listing photos are illustrative. Geist is licensed under the SIL Open Font License. See Geist-OFL.txt.
